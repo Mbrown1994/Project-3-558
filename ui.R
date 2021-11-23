@@ -27,14 +27,15 @@ shinyUI(navbarPage(
             # Add in the image
             img(
                 src = "NBAlogo.png",
-                height = '350 px',
-                width = '400 px'
+                height = '450 px',
+                width = '500 px'
                 
             ),
             # Describe what this app will be used for
             h3("The Main Purpose of This App"),
-            "This app explores shots taken by 5 of the NBAs top players.", tags$br(),
-            "The players explored include LeBron James, Kevrin Durant,", tags$br(),
+            "This app explores shots taken by 5 of the NBAs top players. The", tags$br(),
+            "NBA is a national basketball league made of 30 teams in North America.", tags$br(),
+            "The players explored in this app include LeBron James, Kevrin Durant,", tags$br(),
             "Russell Westbrook, Stephen Curry, and Carmelo Anthony.", tags$br(),
             ),
         sidebarPanel(
@@ -51,7 +52,7 @@ shinyUI(navbarPage(
             h3("The Tabs"),
             tags$ul(
                 tags$li(
-                    "Data: Exaplins the data that we are working with"
+                    "Data: Explains the data that we are working with"
                 ),
                 tags$li(
                     "Data Exploration: Summarizes the data with visual explanations"
@@ -67,7 +68,21 @@ shinyUI(navbarPage(
           
         ),
     tabPanel(
-        title = "Data Exploration"
+        title = "Data Exploration",
+        sidebarLayout(
+            sidebarPanel(
+                h4("Player Selection:"),
+                selectizeInput("player", "Player", selected = "LeBron James", choices = levels(as.factor(nba_shots$player_name))),
+                uiOutput("image"),
+                selectizeInput("season", "Season", selected = "2017-18", choices = levels(as.factor(nba_shots$season))),
+                radioButtons(inputId = "shots", label = h4("Shot Status"), choices = list("All Shots", "Missed Shots", "Made Shots"))
+                
+            ),
+            mainPanel(
+                plotOutput("BasketballPlot")
+                
+            )
+        )
     ),
     
     tabPanel(
