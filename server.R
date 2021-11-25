@@ -1460,7 +1460,7 @@ shinyServer(function(input, output, session) {
       gg_court = make_court()
       graph_data = filter(nba_shots, player_name == "Carmelo Anthony" & season == "2017-18")
       gg_court + geom_point(data = graph_data, alpha = 0.60, size = 2.0,
-                            aes(loc_x, loc_y, color = shot_made_flag)) + scale_color_manual("", values = c(made = "wheat2", missed = "sienna3"))}
+                            aes(loc_x, loc_y, color = shot_made_flag)) + scale_color_manual("", values = c(made = "goldenrod1", missed = "darkgreen"))}
     
     # This is the data for all shots by Carmelo Anthony in the 2016-2017 season
     else if (input$player == "Carmelo Anthony" & input$shots == "All Shots" & input$season == "2016-17"){
@@ -1468,7 +1468,7 @@ shinyServer(function(input, output, session) {
       gg_court = make_court()
       graph_data = filter(nba_shots, player_name == "Carmelo Anthony" & season == "2016-17")
       gg_court + geom_point(data = graph_data, alpha = 0.60, size = 2.0,
-                            aes(loc_x, loc_y, color = shot_made_flag)) + scale_color_manual("", values = c(made = "wheat2", missed = "sienna3"))}
+                            aes(loc_x, loc_y, color = shot_made_flag)) + scale_color_manual("", values = c(made = "goldenrod1", missed = "darkgreen"))}
     
     # This is the data for all shots by Carmelo Anthony in the 2015-2016 season
     else if (input$player == "Carmelo Anthony" & input$shots == "All Shots" & input$season == "2015-16"){
@@ -1476,7 +1476,7 @@ shinyServer(function(input, output, session) {
       gg_court = make_court()
       graph_data = filter(nba_shots, player_name == "Carmelo Anthony" & season == "2015-16")
       gg_court + geom_point(data = graph_data, alpha = 0.60, size = 2.0,
-                            aes(loc_x, loc_y, color = shot_made_flag)) + scale_color_manual("", values = c(made = "wheat2", missed = "sienna3"))}
+                            aes(loc_x, loc_y, color = shot_made_flag)) + scale_color_manual("", values = c(made = "goldenrod1", missed = "darkgreen"))}
     
     # This is the data for all shots by Carmelo Anthony in the 2014-2015 season
     else if (input$player == "Carmelo Anthony" & input$shots == "All Shots" & input$season == "2014-15"){
@@ -1484,7 +1484,7 @@ shinyServer(function(input, output, session) {
       gg_court = make_court()
       graph_data = filter(nba_shots, player_name == "Carmelo Anthony" & season == "2014-15")
       gg_court + geom_point(data = graph_data, alpha = 0.60, size = 2.0,
-                            aes(loc_x, loc_y, color = shot_made_flag)) + scale_color_manual("", values = c(made = "wheat2", missed = "sienna3"))}
+                            aes(loc_x, loc_y, color = shot_made_flag)) + scale_color_manual("", values = c(made = "goldenrod1", missed = "darkgreen"))}
     
     # This is the data for all shots by Carmelo Anthony in the 2013-2014 season
     else if (input$player == "Carmelo Anthony" & input$shots == "All Shots" & input$season == "2013-14"){
@@ -1492,7 +1492,7 @@ shinyServer(function(input, output, session) {
       gg_court = make_court()
       graph_data = filter(nba_shots, player_name == "Carmelo Anthony" & season == "2013-14")
       gg_court + geom_point(data = graph_data, alpha = 0.60, size = 2.0,
-                            aes(loc_x, loc_y, color = shot_made_flag)) + scale_color_manual("", values = c(made = "wheat2", missed = "sienna3"))}
+                            aes(loc_x, loc_y, color = shot_made_flag)) + scale_color_manual("", values = c(made = "goldenrod1", missed = "darkgreen"))}
     
     # This is the data for all shots by Carmelo Anthony in the 2012-2013 season
     else if (input$player == "Carmelo Anthony" & input$shots == "All Shots" & input$season == "2012-13"){
@@ -1500,7 +1500,7 @@ shinyServer(function(input, output, session) {
       gg_court = make_court()
       graph_data = filter(nba_shots, player_name == "Carmelo Anthony" & season == "2012-13")
       gg_court + geom_point(data = graph_data, alpha = 0.60, size = 2.0,
-                            aes(loc_x, loc_y, color = shot_made_flag)) + scale_color_manual("", values = c(made = "orange", missed = "steel blue"))}
+                            aes(loc_x, loc_y, color = shot_made_flag)) + scale_color_manual("", values = c(made = "goldenrod1", missed = "darkgreen"))}
     
     # This is the data for all shots by Carmelo Anthony in the 2011-2012
     else if (input$player == "Carmelo Anthony" & input$shots == "All Shots" & input$season == "2011-12"){
@@ -1508,91 +1508,312 @@ shinyServer(function(input, output, session) {
       gg_court = make_court()
       graph_data = filter(nba_shots, player_name == "Carmelo Anthony" & season == "2011-12")
       gg_court + geom_point(data = graph_data, alpha = 0.60, size = 2.0,
-                            aes(loc_x, loc_y, color = shot_made_flag)) + scale_color_manual("", values = c(made = "orange", missed = "steel blue"))}
+                            aes(loc_x, loc_y, color = shot_made_flag)) + scale_color_manual("", values = c(made = "goldenrod1", missed = "darkgreen"))}
     
-    # This is the data for all shots by Carmelo Anthony in the 
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-
-    else if (input$player == "Carmelo Anothony" & input$shots == "All Shots"){
+    # This is the data for all shots by Carmelo Anthony in the 2010-2011 season
+    else if (input$player == "Carmelo Anthony" & input$shots == "All Shots" & input$season == "2010-11"){
       source("helpers.R")
       gg_court = make_court()
-      graph_data = filter(nba_shots, player_name == "Carmelo Anthony")
+      graph_data = filter(nba_shots, player_name == "Carmelo Anthony" & season == "2010-11")
       gg_court + geom_point(data = graph_data, alpha = 0.60, size = 2.0,
-                            aes(loc_x, loc_y, color = shot_made_flag)) + scale_color_manual("", values = c(made = "brown", missed = "light blue"))}
-    else if (input$player == "LeBron James" & input$shots == "Made Shots"){
-      source("helpers.R")  
-    gg_court = make_court()
-    graph_data = filter(nba_shots, player_name == "LeBron James")
-    gg_court + geom_point(data = graph_data, alpha = 0.60, size = 2.0,
-                          aes(loc_x, loc_y, color = "made")) + scale_color_manual("", values = c(made = "red"))} 
-    else if (input$player == "Russell Westbrook" & input$shots == "Made Shots"){
+                            aes(loc_x, loc_y, color = shot_made_flag)) + scale_color_manual("", values = c(made = "goldenrod1", missed = "darkgreen"))}
+    
+    # This is the data for all shots by Carmelo Anthony in the 2009-2010 season
+    else if (input$player == "Carmelo Anthony" & input$shots == "All Shots" & input$season == "2009-10"){
+      source("helpers.R")
+      gg_court = make_court()
+      graph_data = filter(nba_shots, player_name == "Carmelo Anthony" & season == "2009-10")
+      gg_court + geom_point(data = graph_data, alpha = 0.60, size = 2.0,
+                            aes(loc_x, loc_y, color = shot_made_flag)) + scale_color_manual("", values = c(made = "goldenrod1", missed = "darkgreen"))}
+    
+    # This is the data for all shots by Carmelo Anthony in the 2008-2009 season
+    else if (input$player == "Carmelo Anthony" & input$shots == "All Shots" & input$season == "2008-09"){
+      source("helpers.R")
+      gg_court = make_court()
+      graph_data = filter(nba_shots, player_name == "Carmelo Anthony" & season == "2008-09")
+      gg_court + geom_point(data = graph_data, alpha = 0.60, size = 2.0,
+                            aes(loc_x, loc_y, color = shot_made_flag)) + scale_color_manual("", values = c(made = "goldenrod1", missed = "darkgreen"))}
+    
+    # This is the data for all shots by Carmelo Anthony in the 2007-2008 season
+    else if (input$player == "Carmelo Anthony" & input$shots == "All Shots" & input$season == "2007-08"){
+      source("helpers.R")
+      gg_court = make_court()
+      graph_data = filter(nba_shots, player_name == "Carmelo Anthony" & season == "2007-08")
+      gg_court + geom_point(data = graph_data, alpha = 0.60, size = 2.0,
+                            aes(loc_x, loc_y, color = shot_made_flag)) + scale_color_manual("", values = c(made = "goldenrod1", missed = "darkgreen"))}
+      
+      # This is the data for all shots by Carmelo Anthony in the 2006-2007 season
+      else if (input$player == "Carmelo Anthony" & input$shots == "All Shots" & input$season == "2006-07"){
         source("helpers.R")
         gg_court = make_court()
-        graph_data = filter(nba_shots, player_name == "Russell Westbrook")
+        graph_data = filter(nba_shots, player_name == "Carmelo Anthony" & season == "2006-07")
         gg_court + geom_point(data = graph_data, alpha = 0.60, size = 2.0,
-                              aes(loc_x, loc_y, color = shot_made_flag)) + scale_color_manual("", values = c(made = "purple"))}
-    else if (input$player == "Kevin Durant" & input$shots == "Made Shots"){
+                              aes(loc_x, loc_y, color = shot_made_flag)) + scale_color_manual("", values = c(made = "goldenrod1", missed = "darkgreen"))}
+      
+      # This is the data for all shots by Carmelo Anthony in the 2005-2006 season
+      else if (input$player == "Carmelo Anthony" & input$shots == "All Shots" & input$season == "2005-06"){
+        source("helpers.R")
+        gg_court = make_court()
+        graph_data = filter(nba_shots, player_name == "Carmelo Anthony" & season == "2005-06")
+        gg_court + geom_point(data = graph_data, alpha = 0.60, size = 2.0,
+                              aes(loc_x, loc_y, color = shot_made_flag)) + scale_color_manual("", values = c(made = "goldenrod1", missed = "darkgreen"))}
+      
+      # This is the data for all shots by Carmelo Anthony in the 2004-2005 season
+      else if (input$player == "Carmelo Anthony" & input$shots == "All Shots" & input$season == "2004-05"){
+        source("helpers.R")
+        gg_court = make_court()
+        graph_data = filter(nba_shots, player_name == "Carmelo Anthony" & season == "2004-05")
+        gg_court + geom_point(data = graph_data, alpha = 0.60, size = 2.0,
+                              aes(loc_x, loc_y, color = shot_made_flag)) + scale_color_manual("", values = c(made = "goldenrod1", missed = "darkgreen"))}
+      
+      # This is the data for all shots by Carmelo Anthony in the 2003-2004 season
+      else if (input$player == "Carmelo Anthony" & input$shots == "All Shots" & input$season == "2003-04"){
+        source("helpers.R")
+        gg_court = make_court()
+        graph_data = filter(nba_shots, player_name == "Carmelo Anthony" & season == "2003-04")
+        gg_court + geom_point(data = graph_data, alpha = 0.60, size = 2.0,
+                              aes(loc_x, loc_y, color = shot_made_flag)) + scale_color_manual("", values = c(made = "goldenrod1", missed = "darkgreen"))}
+    
+    # This is the data for all made shots by Carmelo Anthony in the 2017-2018 season
+    else if (input$player == "Carmelo Anthony" & input$shots == "Made Shots" & input$season == "2017-18"){
       source("helpers.R")
       gg_court = make_court()
-      graph_data = filter(nba_shots, player_name == "Kevin Durant")
+      graph_data = filter(nba_shots, player_name == "Carmelo Anthony" & season == "2017-18" & shot_made_flag == "made")
       gg_court + geom_point(data = graph_data, alpha = 0.60, size = 2.0,
-                            aes(loc_x, loc_y, color = shot_made_flag)) + scale_color_manual("", values = c(made = "blue"))}
-    else if (input$player == "Stephen Curry" & input$shots == "Made Shots"){
+                            aes(loc_x, loc_y, color = shot_made_flag)) + scale_color_manual("", values = (made = "goldenrod1"))}
+    
+    # This is the data for all made shots by Carmelo Anthony in the 2016-2017 season
+    else if (input$player == "Carmelo Anthony" & input$shots == "Made Shots" & input$season == "2016-17"){
       source("helpers.R")
       gg_court = make_court()
-      graph_data = filter(nba_shots, player_name == "Stephen Curry")
+      graph_data = filter(nba_shots, player_name == "Carmelo Anthony" & season == "2016-17" & shot_made_flag == "made")
       gg_court + geom_point(data = graph_data, alpha = 0.60, size = 2.0,
-                            aes(loc_x, loc_y, color = shot_made_flag)) + scale_color_manual("", values = c(made = "orange"))}
-    else if (input$player == "Carmelo Anothony" & input$shots == "Made Shots"){
+                            aes(loc_x, loc_y, color = shot_made_flag)) + scale_color_manual("", values = (made = "goldenrod1"))}
+    
+    # This is the data for all made shots by Carmelo Anthony in the 2015-2016 season
+    else if (input$player == "Carmelo Anthony" & input$shots == "Made Shots" & input$season == "2015-16"){
       source("helpers.R")
       gg_court = make_court()
-      graph_data = filter(nba_shots, player_name == "Carmelo Anthony")
+      graph_data = filter(nba_shots, player_name == "Carmelo Anthony" & season == "2015-16" & shot_made_flag == "made")
       gg_court + geom_point(data = graph_data, alpha = 0.60, size = 2.0,
-                            aes(loc_x, loc_y, color = shot_made_flag)) + scale_color_manual("", values = c(made = "brown"))}
-    else if (input$player == "LeBron James" & input$shots == "Missed Shots"){
-      source("helpers.R")  
-      gg_court = make_court()
-      graph_data = filter(nba_shots, player_name == "LeBron James")
-      gg_court + geom_point(data = graph_data, alpha = 0.60, size = 2.0,
-                            aes(loc_x, loc_y, color = "missed")) + scale_color_manual("", values = c(missed = "black"))}
-    else if (input$player == "Russell Westbrook" & input$shots == "Missed Shots"){
+                            aes(loc_x, loc_y, color = shot_made_flag)) + scale_color_manual("", values = (made = "goldenrod1"))}
+    
+    # This is the data for all made shots by Carmelo Anthony in the 2014-2015 season
+    else if (input$player == "Carmelo Anthony" & input$shots == "Made Shots" & input$season == "2014-15"){
       source("helpers.R")
       gg_court = make_court()
-      graph_data = filter(nba_shots, player_name == "Russell Westbrook")
+      graph_data = filter(nba_shots, player_name == "Carmelo Anthony" & season == "2014-15" & shot_made_flag == "made")
       gg_court + geom_point(data = graph_data, alpha = 0.60, size = 2.0,
-                            aes(loc_x, loc_y, color = shot_made_flag)) + scale_color_manual("", values = c(missed = "yellow"))}
-    else if (input$player == "Kevin Durant" & input$shots == "Missed Shots"){
+                            aes(loc_x, loc_y, color = shot_made_flag)) + scale_color_manual("", values = (made = "goldenrod1"))}
+    
+    # This is the data for all made shots by Carmelo Anthony in the 2013-2014 season
+    else if (input$player == "Carmelo Anthony" & input$shots == "Made Shots" & input$season == "2013-14"){
       source("helpers.R")
       gg_court = make_court()
-      graph_data = filter(nba_shots, player_name == "Kevin Durant")
+      graph_data = filter(nba_shots, player_name == "Carmelo Anthony" & season == "2013-14" & shot_made_flag == "made")
       gg_court + geom_point(data = graph_data, alpha = 0.60, size = 2.0,
-                            aes(loc_x, loc_y, color = shot_made_flag)) + scale_color_manual("", values = c(missed = "green"))}
-    else if (input$player == "Stephen Curry" & input$shots == "Missed Shots"){
+                            aes(loc_x, loc_y, color = shot_made_flag)) + scale_color_manual("", values = (made = "goldenrod1"))}
+    
+    # This is the data for all made shots by Carmelo Anthony in the 2012-2013 season
+    else if (input$player == "Carmelo Anthony" & input$shots == "Made Shots" & input$season == "2012-13"){
       source("helpers.R")
       gg_court = make_court()
-      graph_data = filter(nba_shots, player_name == "Stephen Curry")
+      graph_data = filter(nba_shots, player_name == "Carmelo Anthony" & season == "2012-13" & shot_made_flag == "made")
       gg_court + geom_point(data = graph_data, alpha = 0.60, size = 2.0,
-                            aes(loc_x, loc_y, color = shot_made_flag)) + scale_color_manual("", values = c(missed = "pink"))}
+                            aes(loc_x, loc_y, color = shot_made_flag)) + scale_color_manual("", values = (made = "goldenrod1"))}
+    
+    # This is the data for all made shots by Carmelo Anthony in the 2011-2012 season
+    else if (input$player == "Carmelo Anthony" & input$shots == "Made Shots" & input$season == "2011-12"){
+      source("helpers.R")
+      gg_court = make_court()
+      graph_data = filter(nba_shots, player_name == "Carmelo Anthony" & season == "2011-12" & shot_made_flag == "made")
+      gg_court + geom_point(data = graph_data, alpha = 0.60, size = 2.0,
+                            aes(loc_x, loc_y, color = shot_made_flag)) + scale_color_manual("", values = (made = "goldenrod1"))}
+    
+    # This is the data for all made shots by Carmelo Anthony in the 2010-2011 season
+    else if (input$player == "Carmelo Anthony" & input$shots == "Made Shots" & input$season == "2010-11"){
+      source("helpers.R")
+      gg_court = make_court()
+      graph_data = filter(nba_shots, player_name == "Carmelo Anthony" & season == "2010-11" & shot_made_flag == "made")
+      gg_court + geom_point(data = graph_data, alpha = 0.60, size = 2.0,
+                            aes(loc_x, loc_y, color = shot_made_flag)) + scale_color_manual("", values = (made = "goldenrod1"))}
+    
+    # This is the data for all made shots by Carmelo Anthony in the 2009-2010 season
+    else if (input$player == "Carmelo Anthony" & input$shots == "Made Shots" & input$season == "2009-10"){
+      source("helpers.R")
+      gg_court = make_court()
+      graph_data = filter(nba_shots, player_name == "Carmelo Anthony" & season == "2009-10" & shot_made_flag == "made")
+      gg_court + geom_point(data = graph_data, alpha = 0.60, size = 2.0,
+                            aes(loc_x, loc_y, color = shot_made_flag)) + scale_color_manual("", values = (made = "goldenrod1"))}
+    
+    # This is the data for all made shots by Carmelo Anthony in the 2008-2009 season
+    else if (input$player == "Carmelo Anthony" & input$shots == "Made Shots" & input$season == "2008-09"){
+      source("helpers.R")
+      gg_court = make_court()
+      graph_data = filter(nba_shots, player_name == "Carmelo Anthony" & season == "2008-09" & shot_made_flag == "made")
+      gg_court + geom_point(data = graph_data, alpha = 0.60, size = 2.0,
+                            aes(loc_x, loc_y, color = shot_made_flag)) + scale_color_manual("", values = (made = "goldenrod1"))}
+    
+    # This is the data for all made shots by Carmelo Anthony in the 2007-2008 season
+    else if (input$player == "Carmelo Anthony" & input$shots == "Made Shots" & input$season == "2007-08"){
+      source("helpers.R")
+      gg_court = make_court()
+      graph_data = filter(nba_shots, player_name == "Carmelo Anthony" & season == "2007-08" & shot_made_flag == "made")
+      gg_court + geom_point(data = graph_data, alpha = 0.60, size = 2.0,
+                            aes(loc_x, loc_y, color = shot_made_flag)) + scale_color_manual("", values = (made = "goldenrod1"))}
+    
+    # This is the data for all made shots by Carmelo Anthony in the 2006-2007 season
+    else if (input$player == "Carmelo Anthony" & input$shots == "Made Shots" & input$season == "2006-07"){
+      source("helpers.R")
+      gg_court = make_court()
+      graph_data = filter(nba_shots, player_name == "Carmelo Anthony" & season == "2006-07" & shot_made_flag == "made")
+      gg_court + geom_point(data = graph_data, alpha = 0.60, size = 2.0,
+                            aes(loc_x, loc_y, color = shot_made_flag)) + scale_color_manual("", values = (made = "goldenrod1"))}
+    
+    # This is the data for all made shots by Carmelo Anthony in the 2005-2006 season
+    else if (input$player == "Carmelo Anthony" & input$shots == "Made Shots" & input$season == "2005-06"){
+      source("helpers.R")
+      gg_court = make_court()
+      graph_data = filter(nba_shots, player_name == "Carmelo Anthony" & season == "2005-06" & shot_made_flag == "made")
+      gg_court + geom_point(data = graph_data, alpha = 0.60, size = 2.0,
+                            aes(loc_x, loc_y, color = shot_made_flag)) + scale_color_manual("", values = (made = "goldenrod1"))}
+    
+    # This is the data for all made shots by Carmelo Anthony in the 2004-2005 season
+    else if (input$player == "Carmelo Anthony" & input$shots == "Made Shots" & input$season == "2004-05"){
+      source("helpers.R")
+      gg_court = make_court()
+      graph_data = filter(nba_shots, player_name == "Carmelo Anthony" & season == "2004-05" & shot_made_flag == "made")
+      gg_court + geom_point(data = graph_data, alpha = 0.60, size = 2.0,
+                            aes(loc_x, loc_y, color = shot_made_flag)) + scale_color_manual("", values = (made = "goldenrod1"))}
+    
+    # This is the data for all made shots by Carmelo Anthony in the 2003-2004 season
+    else if (input$player == "Carmelo Anthony" & input$shots == "Made Shots" & input$season == "2003-04"){
+      source("helpers.R")
+      gg_court = make_court()
+      graph_data = filter(nba_shots, player_name == "Carmelo Anthony" & season == "2003-04" & shot_made_flag == "made")
+      gg_court + geom_point(data = graph_data, alpha = 0.60, size = 2.0,
+                            aes(loc_x, loc_y, color = shot_made_flag)) + scale_color_manual("", values = (made = "goldenrod1"))}
+    
+    # This is the data for all missed shots by Carmelo Anthony in the 2017-2018 season
+    else if (input$player == "Carmelo Anthony" & input$shots == "Missed Shots" & input$season == "2017-18"){
+      source("helpers.R")
+      gg_court = make_court()
+      graph_data = filter(nba_shots, player_name == "Carmelo Anthony" & season == "2017-18" & shot_made_flag == "missed")
+      gg_court + geom_point(data = graph_data, alpha = 0.60, size = 2.0,
+                            aes(loc_x, loc_y, color = shot_made_flag)) + scale_color_manual("", values = (missed = "darkgreen"))}
+    
+    # This is the data for all missed shots by Carmelo Anthony in the 2016-2017 season
+    else if (input$player == "Carmelo Anthony" & input$shots == "Missed Shots" & input$season == "2016-17"){
+      source("helpers.R")
+      gg_court = make_court()
+      graph_data = filter(nba_shots, player_name == "Carmelo Anthony" & season == "2016-17" & shot_made_flag == "missed")
+      gg_court + geom_point(data = graph_data, alpha = 0.60, size = 2.0,
+                            aes(loc_x, loc_y, color = shot_made_flag)) + scale_color_manual("", values = (missed = "darkgreen"))}
+    
+    # This is the data for all missed shots by Carmelo Anthony in the 2015-2016 season
+    else if (input$player == "Carmelo Anthony" & input$shots == "Missed Shots" & input$season == "2015-16"){
+      source("helpers.R")
+      gg_court = make_court()
+      graph_data = filter(nba_shots, player_name == "Carmelo Anthony" & season == "2015-16" & shot_made_flag == "missed")
+      gg_court + geom_point(data = graph_data, alpha = 0.60, size = 2.0,
+                            aes(loc_x, loc_y, color = shot_made_flag)) + scale_color_manual("", values = (missed = "darkgreen"))}
+    
+    # This is the data for all missed shots by Carmelo Anthony in the 2014-2015 season
+    else if (input$player == "Carmelo Anthony" & input$shots == "Missed Shots" & input$season == "2014-15"){
+      source("helpers.R")
+      gg_court = make_court()
+      graph_data = filter(nba_shots, player_name == "Carmelo Anthony" & season == "2014-15" & shot_made_flag == "missed")
+      gg_court + geom_point(data = graph_data, alpha = 0.60, size = 2.0,
+                            aes(loc_x, loc_y, color = shot_made_flag)) + scale_color_manual("", values = (missed = "darkgreen"))}
+    
+    # This is the data for all missed shots by Carmelo Anthony in the 2013-2014 season
+    else if (input$player == "Carmelo Anthony" & input$shots == "Missed Shots" & input$season == "2013-14"){
+      source("helpers.R")
+      gg_court = make_court()
+      graph_data = filter(nba_shots, player_name == "Carmelo Anthony" & season == "2013-14" & shot_made_flag == "missed")
+      gg_court + geom_point(data = graph_data, alpha = 0.60, size = 2.0,
+                            aes(loc_x, loc_y, color = shot_made_flag)) + scale_color_manual("", values = (missed = "darkgreen"))}
+    
+    # This is the data for all missed shots by Carmelo Anthony in the 2012-2013 season
+    else if (input$player == "Carmelo Anthony" & input$shots == "Missed Shots" & input$season == "2012-13"){
+      source("helpers.R")
+      gg_court = make_court()
+      graph_data = filter(nba_shots, player_name == "Carmelo Anthony" & season == "2012-13" & shot_made_flag == "missed")
+      gg_court + geom_point(data = graph_data, alpha = 0.60, size = 2.0,
+                            aes(loc_x, loc_y, color = shot_made_flag)) + scale_color_manual("", values = (missed = "darkgreen"))}
+    
+    # This is the data for all missed shots by Carmelo Anthony in the 2011-2012 season
+    else if (input$player == "Carmelo Anthony" & input$shots == "Missed Shots" & input$season == "2011-12"){
+      source("helpers.R")
+      gg_court = make_court()
+      graph_data = filter(nba_shots, player_name == "Carmelo Anthony" & season == "2011-12" & shot_made_flag == "missed")
+      gg_court + geom_point(data = graph_data, alpha = 0.60, size = 2.0,
+                            aes(loc_x, loc_y, color = shot_made_flag)) + scale_color_manual("", values = (missed = "darkgreen"))}
+    
+    # This is the data for all missed shots by Carmelo Anthony in the 2010-2011 season
+    else if (input$player == "Carmelo Anthony" & input$shots == "Missed Shots" & input$season == "2010-11"){
+      source("helpers.R")
+      gg_court = make_court()
+      graph_data = filter(nba_shots, player_name == "Carmelo Anthony" & season == "2010-11" & shot_made_flag == "missed")
+      gg_court + geom_point(data = graph_data, alpha = 0.60, size = 2.0,
+                            aes(loc_x, loc_y, color = shot_made_flag)) + scale_color_manual("", values = (missed = "darkgreen"))}
+    
+    # This is the data for all missed shots by Carmelo Anthony in the 2009-2010 season
+    else if (input$player == "Carmelo Anthony" & input$shots == "Missed Shots" & input$season == "2009-10"){
+      source("helpers.R")
+      gg_court = make_court()
+      graph_data = filter(nba_shots, player_name == "Carmelo Anthony" & season == "2009-10" & shot_made_flag == "missed")
+      gg_court + geom_point(data = graph_data, alpha = 0.60, size = 2.0,
+                            aes(loc_x, loc_y, color = shot_made_flag)) + scale_color_manual("", values = (missed = "darkgreen"))}
+    
+    # This is the data for all missed shots by Carmelo Anthony in the 2008-2009 season
+    else if (input$player == "Carmelo Anthony" & input$shots == "Missed Shots" & input$season == "2008-09"){
+      source("helpers.R")
+      gg_court = make_court()
+      graph_data = filter(nba_shots, player_name == "Carmelo Anthony" & season == "2008-09" & shot_made_flag == "missed")
+      gg_court + geom_point(data = graph_data, alpha = 0.60, size = 2.0,
+                            aes(loc_x, loc_y, color = shot_made_flag)) + scale_color_manual("", values = (missed = "darkgreen"))}
+    
+    # This is the data for all missed shots by Carmelo Anthony in the 2007-2008 season
+    else if (input$player == "Carmelo Anthony" & input$shots == "Missed Shots" & input$season == "2007-08"){
+      source("helpers.R")
+      gg_court = make_court()
+      graph_data = filter(nba_shots, player_name == "Carmelo Anthony" & season == "2007-08" & shot_made_flag == "missed")
+      gg_court + geom_point(data = graph_data, alpha = 0.60, size = 2.0,
+                            aes(loc_x, loc_y, color = shot_made_flag)) + scale_color_manual("", values = (missed = "darkgreen"))}
+    
+    # This is the data for all missed shots by Carmelo Anthony in the 2006-2007 season
+    else if (input$player == "Carmelo Anthony" & input$shots == "Missed Shots" & input$season == "2006-07"){
+      source("helpers.R")
+      gg_court = make_court()
+      graph_data = filter(nba_shots, player_name == "Carmelo Anthony" & season == "2006-07" & shot_made_flag == "missed")
+      gg_court + geom_point(data = graph_data, alpha = 0.60, size = 2.0,
+                            aes(loc_x, loc_y, color = shot_made_flag)) + scale_color_manual("", values = (missed = "darkgreen"))}
+    
+    # This is the data for all missed shots by Carmelo Anthony in the 2005-2006 season
+    else if (input$player == "Carmelo Anthony" & input$shots == "Missed Shots" & input$season == "2005-06"){
+      source("helpers.R")
+      gg_court = make_court()
+      graph_data = filter(nba_shots, player_name == "Carmelo Anthony" & season == "2005-06" & shot_made_flag == "missed")
+      gg_court + geom_point(data = graph_data, alpha = 0.60, size = 2.0,
+                            aes(loc_x, loc_y, color = shot_made_flag)) + scale_color_manual("", values = (missed = "darkgreen"))}
+    
+    # This is the data for all missed shots by Carmelo Anthony in the 2004-2005 season
+    else if (input$player == "Carmelo Anthony" & input$shots == "Missed Shots" & input$season == "2004-05"){
+      source("helpers.R")
+      gg_court = make_court()
+      graph_data = filter(nba_shots, player_name == "Carmelo Anthony" & season == "2004-05" & shot_made_flag == "missed")
+      gg_court + geom_point(data = graph_data, alpha = 0.60, size = 2.0,
+                            aes(loc_x, loc_y, color = shot_made_flag)) + scale_color_manual("", values = (missed = "darkgreen"))}
+    
+    # This is the data for all missed shots by Carmelo Anthony in the 2003-2004 season
+  
     else{
       source("helpers.R")
       gg_court = make_court()
-      graph_data = filter(nba_shots, player_name == "Carmelo Anthony")
+      graph_data = filter(nba_shots, player_name == "Carmelo Anthony" & season == "2003-04" & shot_made_flag == "missed")
       gg_court + geom_point(data = graph_data, alpha = 0.60, size = 2.0,
-                            aes(loc_x, loc_y, color = shot_made_flag)) + scale_color_manual("", values = c(missed = "light blue"))}
+                            aes(loc_x, loc_y, color = shot_made_flag)) + scale_color_manual("", values = c(missed = "darkgreen"))}
     
   })
   
