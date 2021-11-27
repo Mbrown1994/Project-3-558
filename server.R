@@ -11,7 +11,22 @@ library(shiny)
 
 # Define server logic required to draw a histogram
 shinyServer(function(input, output, session) {
-  # Create a plot for Data Exploration page
+  
+  # Create the table for the Data tab
+  output$table <- renderDataTable({
+    specificPlayers <- unlist(input$specificPlayers)
+    Shots <- unlist(input$Shots)
+    selectedCols <- unlist(input$selectedCols)
+    
+    # Filter
+    nba_shots %>% filter(player_name %in% specificPlayers,
+                         shot_made_flag %in% Shots) %>% select(selectedCols)
+  })
+ 
+  
+  
+  
+   # Create a plot for Data Exploration page
   output$BasketballPlot <- renderPlot({
     
     # This is the data for all shots by LeBron James in the 2017-2018 season
