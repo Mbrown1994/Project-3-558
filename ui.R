@@ -16,53 +16,6 @@ shinyUI(navbarPage(
     # Add in the different tabs
     tabsetPanel(
         
-        # Create the tab for the 'Data' section of this app
-        tabPanel(
-            # Add the title
-            title = "Data",
-            
-            # Create a side panel
-            sidebarPanel(
-                # Filter the data by player
-                selectInput(
-                    inputId = "specificPlayers",
-                    label = "Filter by NBA Players",
-                    choices = unique(nba_shots$player_name),
-                    selected = unique(nba_shots$player_name),
-                    multiple = TRUE,
-                    selectize = TRUE
-                ),
-                
-                # Filter the data by shots 
-                selectInput(
-                    inputId = "Shots",
-                    label = "Filter by shots",
-                    choices = c("made", "missed"),
-                    selected = c("made", "missed"),
-                    multiple = TRUE,
-                    selectize = TRUE
-                ),
-                
-                # Filter for the display of columns
-                selectInput(
-                    inputId  = "selectedCols",
-                    label = "Filter Columns",
-                    choices = colnames(nba_shots),
-                    selected = colnames(nba_shots),
-                    multiple = TRUE,
-                    selectize = TRUE
-                ),
-                
-               
-            ),
-            
-            # Output the table
-            mainPanel(
-                dataTableOutput(outputId = "table")
-            )
-            
-        ),
-    
         # Create the tab for the 'About' section of the app
     tabPanel(
         # Add the title
@@ -114,6 +67,54 @@ shinyUI(navbarPage(
             ),
           
         ),
+    
+    # Create the tab for the 'Data' section of this app
+    tabPanel(
+        # Add the title
+        title = "Data",
+        
+        # Create a side panel
+        sidebarPanel(
+            # Filter the data by player
+            selectInput(
+                inputId = "specificPlayers",
+                label = "Filter by NBA Players",
+                choices = unique(nba_shots$player_name),
+                selected = unique(nba_shots$player_name),
+                multiple = TRUE,
+                selectize = TRUE
+            ),
+            
+            # Filter the data by shots 
+            selectInput(
+                inputId = "Shots",
+                label = "Filter by shots",
+                choices = c("made", "missed"),
+                selected = c("made", "missed"),
+                multiple = TRUE,
+                selectize = TRUE
+            ),
+            
+            # Filter for the display of columns
+            selectInput(
+                inputId  = "selectedCols",
+                label = "Filter Columns",
+                choices = colnames(nba_shots),
+                selected = colnames(nba_shots),
+                multiple = TRUE,
+                selectize = TRUE
+            ),
+            
+            
+        ),
+        
+        # Output the table
+        mainPanel(
+            dataTableOutput(outputId = "table")
+        )
+        
+    ),
+    
     tabPanel(
         title = "Data Exploration",
         sidebarLayout(
