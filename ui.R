@@ -105,6 +105,8 @@ shinyUI(navbarPage(
                 selectize = TRUE
             ),
             
+            # Allow the data to be downloaded by the user
+            downloadButton("Download", "Download the data here")
             
         ),
         

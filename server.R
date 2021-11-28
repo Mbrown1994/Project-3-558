@@ -23,8 +23,22 @@ shinyServer(function(input, output, session) {
                          shot_made_flag %in% Shots) %>% select(selectedCols)
   })
  
-  
-  
+  # Allow the user to download the data
+  output$Download <- downloadHandler(
+  filename = function (){
+    paste("NBAdata.csv")
+  },
+  content = function(file){
+    write.csv(
+      nba_shots %>% 
+        filter(player_name %in% input$specificPlayers,
+               shot_made_flag %in% input$Shots) %>%
+        select(input$selectedCols),
+      file,
+      row.names = FALSE
+    )
+  }
+  )
   
    # Create a plot for Data Exploration page
   output$BasketballPlot <- renderPlot({
