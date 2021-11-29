@@ -135,8 +135,123 @@ shinyUI(navbarPage(
         )
     ),
     
-    tabPanel(
-        title = "Modeling"
+    # Create 3 sub-tabs for the modeling tab
+    navbarMenu(
+        
+        # Create the title
+        title = "Modeling",
+        
+        # Modeling info tab
+        tabPanel(
+            title = "Modeling Information",
+            mainPanel(fluidPage(
+                br(),
+                h4("Overview of the Modeling"),
+                "The predictive modeling used within this app,",
+                "categorized as unsupervised learning, allows us",
+                "to learn about patterns and relationships within",
+                "our data. The models used take in our existing data",
+                "to predict values for new occurences",
+                br(),
+                br(),
+                "The unsupervised methods used here are Logistic ",
+                "Regression, Classification Trees, and Random Forests methods.",
+                "You can learn more about each individual model used within this",
+                "app in the sections below.",
+                br(),
+                br(),
+                
+        # Overview of logistic regression.
+                h4("Model 1: Logistic Regression"),
+        "Logistic Regression is one of the predictive modeling methods",
+        "used in this app. In general, logistic regression is a type of",
+        "regression analysis used to find the relationship between a",
+        "dependent variable and either one independent variable or a",
+        "series of independent variables.",
+        br(),
+        br(),
+        
+        # Overview of Classification Trees
+        h4("Model 2: Classification Trees"),
+        "Explain here.",
+        br(),
+        br(),
+        "Explain more here",
+        br(),
+        br(),
+        
+        # Overview of Random Forests
+        h4("Random Forests"),
+        "Explain here.",
+        br(),
+        br(),
+        "Explain more here",
+        br(),
+        br(),
+                
+            ))
+        ),
+        
+        # Tab for fitting the models explained
+        tabPanel(
+            title = "Fitting the Models",
+            sidebarPanel(
+                h3( "Split the data: Train and Test"),
+                numericInput(
+                    inputId = "RandomSeed",
+                    label = "Set a Random Seed",
+                    value = 1,
+                    min = -1000,
+                    max = 1000,
+                    step = 1
+                ),
+                
+                # Select the data to be used for the test set
+                numericInput(
+                    inputId = "TestSet",
+                    label = "Data used for Test Set",
+                    value = 0.2,
+                    min = 0.1,
+                    max = 0.5,
+                    step = 0.05
+                ),
+                
+                # Cross-Validation
+                h3("Cross-Validation"),
+                div(
+                    numericInput(
+                        inputId = "Folds",
+                        label = "Number of Folds",
+                        value = 3,
+                        min = 3,
+                        max = 5,
+                        step = 1
+                    ),
+                    style = "display:inline-block"
+                ),
+                
+                # Logistic Regression
+                h3("Logistic Regression"),
+                selectInput(
+                    inputId = "LogisticRegression",
+                    label = "Variables:",
+                    choices = colnames(nba_shots)[3:18],
+                    selected = c("loc_x","loc_y","shot_distance","minutes_remaining","seconds_remaining","time_remaining"),
+                    multiple = TRUE,
+                    selectize = TRUE
+                )
+                
+            )
+            
+        ),
+        
+        # Prediction Tab
+        tabPanel(
+            title = "Prediction"
+        )
+        
+        
+        
     )
     
     )))
