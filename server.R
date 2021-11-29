@@ -1,13 +1,12 @@
-#
-# This is the server logic of a Shiny web application. You can run the
-# application by clicking 'Run App' above.
-#
-# Find out more about building applications with Shiny here:
-#
-#    http://shiny.rstudio.com/
-#
-
+# Packages used for this analysis
+library(shinythemes)
+library(tidyverse)
+library(magrittr)
 library(shiny)
+
+# Read in the Data 
+load("~/Desktop/R Programming/git-project/Final Project/Project-3-558/nba_shots.RData")
+
 
 # Define server logic required to draw a histogram
 shinyServer(function(input, output, session) {

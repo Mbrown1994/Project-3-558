@@ -1,4 +1,10 @@
 
+# Packages used for this analysis
+library(shinythemes)
+library(tidyverse)
+library(magrittr)
+library(shiny)
+
 # Read in the Data 
 load("~/Desktop/R Programming/git-project/Final Project/Project-3-558/nba_shots.RData")
 
@@ -125,7 +131,14 @@ shinyUI(navbarPage(
                 selectizeInput("player", "Player", selected = "LeBron James", choices = levels(as.factor(nba_shots$player_name))),
                 uiOutput("image"),
                 selectizeInput("season", "Season", selected = "2017-18", choices = levels(as.factor(nba_shots$season))),
-                radioButtons(inputId = "shots", label = h4("Shot Status"), choices = list("All Shots", "Missed Shots", "Made Shots"))
+                radioButtons(inputId = "shots", label = h4("Shot Status"), choices = list("All Shots", "Missed Shots", "Made Shots")),
+                
+                # Summary portion of the sidebar
+                radioButtons(
+                    inputId = "SummaryType",
+                    label = "Type of Summary",
+                    choiceValues = 
+                )
                 
             ),
             mainPanel(
@@ -148,13 +161,13 @@ shinyUI(navbarPage(
                 br(),
                 h4("Overview of the Modeling"),
                 "The predictive modeling used within this app,",
-                "categorized as unsupervised learning, allows us",
+                "categorized as supervised learning, allows us",
                 "to learn about patterns and relationships within",
                 "our data. The models used take in our existing data",
-                "to predict values for new occurences",
+                "to predict values for new occurences.",
                 br(),
                 br(),
-                "The unsupervised methods used here are Logistic ",
+                "The supervised methods used here are Logistic",
                 "Regression, Classification Trees, and Random Forests methods.",
                 "You can learn more about each individual model used within this",
                 "app in the sections below.",
@@ -170,22 +183,57 @@ shinyUI(navbarPage(
         "series of independent variables.",
         br(),
         br(),
-        
+        tags$ul(
+        "Advantages of Logistic Regression:",
+        tags$li("Efficient to train and easy to implement"),
+        tags$li("Less prone to over-fitting"),
+        tags$li("Good performance when the dataset is linearly seperable"),
+        br(),
+        "Disadvantages of Logistic Regression:",
+        tags$li("Can only be used to predict discrete functions"),
+        tags$li("Overfitting can occur with high-dimensional datasets"),
+        tags$li("Can't solve non-linear issues")
+        ),
+        br(),
         # Overview of Classification Trees
         h4("Model 2: Classification Trees"),
-        "Explain here.",
+        "Tree based methods like Classification Trees splits up",
+        "the predictor space into regions with different predictions",
+        "for each region. The Classification Tree utilizes the most",
+        "prevalent class as prediction in each given region.",
         br(),
         br(),
-        "Explain more here",
+        tags$ul(
+            "Advantages of Classification Trees:",
+            tags$li("Trees are easy to explain/understand"),
+            tags$li("Clear visualization after plotting"),
+            tags$li("Works with continuous and categorical variables"),
+            br(),
+            "Disadvantages of Classification Trees:",
+            tags$li("Overfitting can occur"),
+            tags$li("High variance in the output due to overfitting"),
+            tags$li("Not as suitable for large data sets")
+        ),
+         
         br(),
-        br(),
-        
         # Overview of Random Forests
         h4("Random Forests"),
-        "Explain here.",
+        "This method creates multiple trees from bootstrap samples and",
+        "is generally better than bagging. Rather than utilizing all predictors,",
+        "a random subset of predictors are used for each tree.",
         br(),
         br(),
-        "Explain more here",
+        tags$ul(
+            "Advantages of Random Forest modeling:",
+            tags$li("Can be used for classification and regression problems"),
+            tags$li("Improves accuracy"),
+            tags$li("Handles large datasets efficiently"),
+            br(),
+            "Disadvantages of Random Forest modeling:",
+            tags$li("Less interpretable compared to other methods"),
+            tags$li("Computationally expensive"),
+            tags$li("Any changes to the data can change the trees")
+        ),
         br(),
         br(),
                 
@@ -201,8 +249,8 @@ shinyUI(navbarPage(
                     inputId = "RandomSeed",
                     label = "Set a Random Seed",
                     value = 1,
-                    min = -1000,
-                    max = 1000,
+                    min = -500,
+                    max = 500,
                     step = 1
                 ),
                 
