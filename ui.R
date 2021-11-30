@@ -331,7 +331,7 @@ shinyUI(navbarPage(
         
         # Prediction Tab
         tabPanel(
-            title = "Prediction"
+            title = "Prediction" 
         )
         
         
