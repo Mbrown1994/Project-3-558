@@ -4,11 +4,10 @@ library(tidyverse)
 library(magrittr)
 library(shiny)
 
-# Read in the Data 
+# Read in the data
 load("~/Desktop/R Programming/git-project/Final Project/Project-3-558/nba_shots.RData")
 
-
-# Define server logic required to draw a histogram
+# Define server logic 
 shinyServer(function(input, output, session) {
   
   # Create the table for the Data tab
@@ -1883,6 +1882,44 @@ shinyServer(function(input, output, session) {
       )
     }
   })
+  
+# Create the summary table for the data exploration tab
+  output$SummaryTable <- renderDT({
+    if(input$SummaryType == "Location"){
+    specificPlayers <- unlist(input$specificPlayers)
+    Shots <- unlist(input$Shots)
+    NumericVariables <- unlist(input$NumericVariables)
+    
+    # Grab the rows from specific players and all shots
+    FilteredData <- nba_shots %>%
+      filter(
+        player_name %in% specificPlayers,
+        shot_made_flag %in% Shots
+      ) %>%
+      select(NumericVariables)
+    
+    numericSummary <- do.call(cbind, lapply(FilteredData, summary))
+    as.data.frame(t(numericSummary))}
+    
+    else{
+      # Get selected players 
+      specificPlayers <- unlist(input$specificPlayers)
+      
+      
+      # Show total made and missed shots by player
+      nba_shots %>%
+        filter(
+          player_name %in% specificPlayers
+        ) %>%
+        select(player_name, shot_made_flag) %>% group_by(player_name) %>%
+        summarize(
+          "Total Shots" = length(shot_made_flag)
+        ) 
+      
+    }
+    
+  })   
+   
 
   })
 

@@ -5,10 +5,9 @@ library(tidyverse)
 library(magrittr)
 library(shiny)
 
-# Read in the Data 
-load("~/Desktop/R Programming/git-project/Final Project/Project-3-558/nba_shots.RData")
 
-# Convert made shots to a factor
+# Read in the data
+load("~/Desktop/R Programming/git-project/Final Project/Project-3-558/nba_shots.RData")
 
 # Define UI for application that draws a histogram
 shinyUI(navbarPage(
@@ -127,26 +126,63 @@ shinyUI(navbarPage(
         title = "Data Exploration",
         sidebarLayout(
             sidebarPanel(
+                h3("Visual Summary"),
                 h4("Player Selection:"),
-                selectizeInput("player", "Player", selected = "LeBron James", choices = levels(as.factor(nba_shots$player_name))),
+                selectizeInput(
+                inputId ="player", 
+                label = "Player", 
+                selected = "LeBron James", 
+                choices = levels(as.factor(nba_shots$player_name))),
+                
                 uiOutput("image"),
-                selectizeInput("season", "Season", selected = "2017-18", choices = levels(as.factor(nba_shots$season))),
-                radioButtons(inputId = "shots", label = h4("Shot Status"), choices = list("All Shots", "Missed Shots", "Made Shots")),
+                selectizeInput(
+                    inputId = "season", 
+                    label = "Season", 
+                    selected = "2017-18", 
+                    choices = levels(as.factor(nba_shots$season))),
+                
+                radioButtons(
+                    inputId = "shots", 
+                    label = h4("Shot Status"), 
+                    choices = list("All Shots", "Missed Shots", "Made Shots")),
                 
                 # Summary portion of the sidebar
+                h3("Numeric Summary"),
                 radioButtons(
-                    inputId = "SummaryType",
-                    label = "Type of Summary",
-                    choiceValues = 
-                )
+                    inputId = "SummaryType", 
+                    label = h4("Type of Summary"),
+                    choices = list("Location", "Total Shots"),
+                    inline = TRUE
+                ),
+                
+                # Show this when Location is selected
+                conditionalPanel(
+                    condition = 'input.SummaryType == "Location"',
+                    selectInput(
+                        inputId = "NumericVariables",
+                        label = "Variables to Summarize:",
+                        choices = colnames(nba_shots)[4:6],
+                        selected = c("loc_x","loc_y","shot_distance"),
+                        multiple = TRUE,
+                        selectize = TRUE
+                    )
+                    
+                ),
                 
             ),
             mainPanel(
-                plotOutput("BasketballPlot")
+                # Put the plots in the main panel
+                h3("Visual Summary"),
+                plotOutput("BasketballPlot"),
+                br(),
+                # Put the summary in the main panel
+                h3("Numeric Summary"),
+                    dataTableOutput("SummaryTable")
+                ),
                 
-            )
-        )
-    ),
+            
+        
+    )),
     
     # Create 3 sub-tabs for the modeling tab
     navbarMenu(
