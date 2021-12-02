@@ -16,6 +16,7 @@ This app utilizes the following packages:
 - `tidyverse`: data manipulation and visualization
 - `magrittr`: formatting
 - `ggplot2`: plotting and visualization
+- `DT`: adds additional creating/editing tools
 
 
 Installation code for each above package:
@@ -27,6 +28,7 @@ install.packages("shinythemes")
 install.packages("tidyverse")
 install.packages("magrittr")
 install.packages("ggplot2")
+install.packages("DT")
 ```
 
 ## The code below will run this app
