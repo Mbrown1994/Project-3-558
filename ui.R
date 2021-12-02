@@ -13,7 +13,11 @@ library(DT)
 suppressWarnings(library(caret))
 
 # Read in the data
-load("nba_shots.RData")
+fileName <- "./NBAdata.csv"
+nba_shots <- read_csv(
+    fileName,
+    col_types = cols()
+)
 
 # Define UI for application that draws a histogram
 shinyUI(navbarPage(
@@ -235,7 +239,9 @@ shinyUI(navbarPage(
         "used in this app. In general, logistic regression is a type of",
         "regression analysis used to find the relationship between a",
         "dependent variable and either one independent variable or a",
-        "series of independent variables.",
+        "series of independent variables. The Logistic Regression equation",
+        "is:",
+        uiOutput("logEq"),
         br(),
         br(),
         tags$ul(

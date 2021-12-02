@@ -5,7 +5,11 @@ library(magrittr)
 library(shiny)
 
 # Read in the data
-load("nba_shots.RData")
+fileName <- "./NBAdata.csv"
+nba_shots <- read_csv(
+  fileName,
+  col_types = cols()
+)
 
 
 # Define server logic 
@@ -2159,6 +2163,15 @@ shinyServer(function(input, output, session) {
         ggtitle("Random Forest Variable of Importance")
       ForestPlot
     })
+  })
+  
+  # Equation for Logistic Regression to be used in the modeling info tab
+  output$logEq <- renderUI({
+    withMathJax(
+      helpText(
+        "$$\\ln(\\frac{p_i}{1-p_i}) = \\beta_0 + \\Sigma^k_{j=1}\\beta_jx_{ij}$$"
+      )
+    )
   })
   
 })
