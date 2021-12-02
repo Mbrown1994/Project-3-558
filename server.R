@@ -1836,7 +1836,7 @@ shinyServer(function(input, output, session) {
     
    # This is the beginning of the Boxplot data
     # This is the data for shot distance by all shots in the 2017-2018 season -  boxplot
-    else if (input$shots == "All Shots" & input$season == "2017-18" & input$PlotChoice == "Boxplot"){
+    else if (input$season == "2017-18" & input$PlotChoice == "Boxplot"){
       graph_data = filter(nba_shots, season == "2017-18")
       p <- ggplot(graph_data, aes(x = player_name, y = shot_distance, fill = player_name)) + 
         geom_boxplot()
@@ -1844,7 +1844,7 @@ shinyServer(function(input, output, session) {
     }
     
     # This is the data for shot distance in the 2016-2017 season - boxplot
-    else if (input$shots == "All Shots" & input$season == "2016-17" & input$PlotChoice == "Boxplot"){
+    else if (input$season == "2016-17" & input$PlotChoice == "Boxplot"){
       graph_data = filter(nba_shots, season == "2016-17")
       p <- ggplot(graph_data, aes(x = player_name, y = shot_distance, fill = player_name)) + 
         geom_boxplot()
@@ -1860,7 +1860,7 @@ shinyServer(function(input, output, session) {
     }
     
     # This is the data for shot distance in the 2014-2015 season - boxplot
-    else if (input$shots == "All Shots" & input$season == "2014-15" & input$PlotChoice == "Boxplot"){
+    else if (input$season == "2014-15" & input$PlotChoice == "Boxplot"){
       graph_data = filter(nba_shots, season == "2014-15")
       p <- ggplot(graph_data, aes(x = player_name, y = shot_distance, fill = player_name)) + 
         geom_boxplot()
@@ -1868,7 +1868,7 @@ shinyServer(function(input, output, session) {
     }
     
     # This is the data for shot distance in the 2013-2014 season - boxplot
-    else if (input$shots == "All Shots" & input$season == "2013-14" & input$PlotChoice == "Boxplot"){
+    else if (input$season == "2013-14" & input$PlotChoice == "Boxplot"){
       graph_data = filter(nba_shots, season == "2013-14")
       p <- ggplot(graph_data, aes(x = player_name, y = shot_distance, fill = player_name)) + 
         geom_boxplot()
@@ -1876,7 +1876,7 @@ shinyServer(function(input, output, session) {
     }
     
     # This is the data for shot distance in the 2012-2013 season - boxplot
-    else if (input$shots == "All Shots" & input$season == "2012-13" & input$PlotChoice == "Boxplot"){
+    else if (input$season == "2012-13" & input$PlotChoice == "Boxplot"){
       graph_data = filter(nba_shots, season == "2012-13")
       p <- ggplot(graph_data, aes(x = player_name, y = shot_distance, fill = player_name)) + 
         geom_boxplot()
@@ -1884,7 +1884,7 @@ shinyServer(function(input, output, session) {
     }
     
     # This is the data for shot distance in the 2011-2012 season -  boxplot
-    else if (input$shots == "All Shots" & input$season == "2011-12" & input$PlotChoice == "Boxplot"){
+    else if (input$season == "2011-12" & input$PlotChoice == "Boxplot"){
       graph_data = filter(nba_shots, season == "2011-12")
       p <- ggplot(graph_data, aes(x = player_name, y = shot_distance, fill = player_name)) + 
         geom_boxplot()
@@ -1892,7 +1892,7 @@ shinyServer(function(input, output, session) {
     }
     
     # This is the data for shot distance in the 2010-2011 season - Boxplot
-    else if (input$shots == "All Shots" & input$season == "2010-11" & input$PlotChoice == "Boxplot"){
+    else if (input$season == "2010-11" & input$PlotChoice == "Boxplot"){
       graph_data = filter(nba_shots, season == "2010-11")
       p <- ggplot(graph_data, aes(x = player_name, y = shot_distance, fill = player_name)) + 
         geom_boxplot()
@@ -1900,7 +1900,7 @@ shinyServer(function(input, output, session) {
     }
     
     # This is the data for shot distance in the 2009-2010 season - boxplot
-    else if (input$shots == "All Shots" & input$season == "2009-10" & input$PlotChoice == "Boxplot"){
+    else if (input$season == "2009-10" & input$PlotChoice == "Boxplot"){
       graph_data = filter(nba_shots, season == "2009-10")
       p <- ggplot(graph_data, aes(x = player_name, y = shot_distance, fill = player_name)) + 
         geom_boxplot()
@@ -1908,7 +1908,7 @@ shinyServer(function(input, output, session) {
     }
     
    # This is the data for shot distance in the 2008-2009 season - boxplot
-    else if (input$shots == "All Shots" & input$season == "2008-09" & input$PlotChoice == "Boxplot"){
+    else if (input$season == "2008-09" & input$PlotChoice == "Boxplot"){
       graph_data = filter(nba_shots, season == "2008-09")
       p <- ggplot(graph_data, aes(x = player_name, y = shot_distance, fill = player_name)) + 
         geom_boxplot()
@@ -1916,7 +1916,7 @@ shinyServer(function(input, output, session) {
     }
     
     # This is the data for shot distance in the 2007-2008 season - boxplot
-    else if (input$shots == "All Shots" & input$season == "2007-08" & input$PlotChoice == "Boxplot"){
+    else if (input$season == "2007-08" & input$PlotChoice == "Boxplot"){
       graph_data = filter(nba_shots, season == "2007-08")
       p <- ggplot(graph_data, aes(x = player_name, y = shot_distance, fill = player_name)) + 
         geom_boxplot()
@@ -1924,7 +1924,7 @@ shinyServer(function(input, output, session) {
     }
     
     # This is the data for shot distance in the 2006-2007 season
-    else if (input$shots == "All Shots" & input$season == "2006-07" & input$PlotChoice == "Boxplot"){
+    else if (input$season == "2006-07" & input$PlotChoice == "Boxplot"){
       graph_data = filter(nba_shots, season == "2006-07")
       p <- ggplot(graph_data, aes(x = player_name, y = shot_distance, fill = player_name)) + 
         geom_boxplot()
@@ -1932,7 +1932,7 @@ shinyServer(function(input, output, session) {
     }
     
     # This is the data for shot distance in the 2005-2006 season
-    else if (input$shots == "All Shots" & input$season == "2005-06" & input$PlotChoice == "Boxplot"){
+    else if (input$season == "2005-06" & input$PlotChoice == "Boxplot"){
       graph_data = filter(nba_shots, season == "2005-06")
       p <- ggplot(graph_data, aes(x = player_name, y = shot_distance, fill = player_name)) + 
         geom_boxplot()
@@ -1940,7 +1940,7 @@ shinyServer(function(input, output, session) {
     }
     
     # This is the data for shot distance in the 2004-2005 season
-    else if (input$shots == "All Shots" & input$season == "2004-05" & input$PlotChoice == "Boxplot"){
+    else if (input$season == "2004-05" & input$PlotChoice == "Boxplot"){
       graph_data = filter(nba_shots, season == "2004-05")
       p <- ggplot(graph_data, aes(x = player_name, y = shot_distance, fill = player_name)) + 
         geom_boxplot()
@@ -1948,7 +1948,7 @@ shinyServer(function(input, output, session) {
     }
     
     # This is the data for shot distance in the 2003-2004 season
-    else if (input$shots == "All Shots" & input$season == "2003-04" & input$PlotChoice == "Boxplot"){
+    else if (input$season == "2003-04" & input$PlotChoice == "Boxplot"){
       graph_data = filter(nba_shots, season == "2003-04")
       p <- ggplot(graph_data, aes(x = player_name, y = shot_distance, fill = player_name)) + 
         geom_boxplot()
@@ -2119,7 +2119,7 @@ shinyServer(function(input, output, session) {
     # Random Forest Section
     rfFit <- train(shot_made_flag~.,
                    data = NBATrain[,c(c("shot_made_flag"), ForestVars)],
-                   method = "rf",
+                   method = "ranger",
                    metric = "Accuracy")
     
     # Update the progress bar

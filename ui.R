@@ -167,7 +167,7 @@ shinyUI(navbarPage(
                 radioButtons(
                     inputId = "SummaryType", 
                     label = h4("Type of Summary"),
-                    choices = list("Location", "Total Shots"),
+                    choices = list("Total Shots", "Location"),
                     inline = TRUE
                 ),
                 
@@ -335,8 +335,8 @@ shinyUI(navbarPage(
             selectInput(
                 inputId = "LogVars",
                 label = "Predictors to use:",
-                choices = colnames(nba_shots)[4:13],
-                selected = c("loc_x", "loc_y", "shot_distance", "minutes_remaining", "seconds_remaining"),
+                choices = colnames(nba_shots)[4:6],
+                selected = c("loc_x", "loc_y", "shot_distance"),
                 multiple = TRUE,
                 selectize = TRUE
             ),
@@ -345,8 +345,8 @@ shinyUI(navbarPage(
             selectInput(
                 inputId = "ClassVars",
                 label = "Predictors to use:",
-                choices = colnames(nba_shots)[4:13],
-                selected = c("loc_x", "loc_y", "shot_distance", "minutes_remaining", "seconds_remaining"),
+                choices = colnames(nba_shots)[4:6],
+                selected = c("loc_x", "loc_y", "shot_distance"),
                 multiple = TRUE,
                 selectize = TRUE
             ),
@@ -355,16 +355,16 @@ shinyUI(navbarPage(
             selectInput(
               inputId = "ForestVars",
               label = "Predictors to use:",
-              choices = colnames(nba_shots)[4:13],
-              selected = c("loc_x", "loc_y", "shot_distance", "minutes_remaining", "seconds_remaining"),
+              choices = colnames(nba_shots)[4:6],
+              selected = c("loc_x", "loc_y", "shot_distance"),
               multiple = TRUE,
               selectize = TRUE
             ),
             # Select the tuning parameters
             selectizeInput(
                 inputId = "Selectmtry",
-                label = "Select a maximum of 10 values for mtry",
-                choices = 1:length(colnames(nba_shots)[4:13]),
+                label = "Values for mtry",
+                choices = 1:length(colnames(nba_shots)[4:6]),
                 multiple = TRUE,
                 selected = c(3, 6, 9),
                 options = list(maxItems = 10)
