@@ -4,10 +4,16 @@ library(shinythemes)
 library(tidyverse)
 library(magrittr)
 library(shiny)
+library(caret)
+library(tree)
+library(dplyr)
+library(DT)
 
+# Ignore warnings
+suppressWarnings(library(caret))
 
 # Read in the data
-load("~/Desktop/R Programming/git-project/Final Project/Project-3-558/nba_shots.RData")
+load("nba_shots.RData")
 
 # Define UI for application that draws a histogram
 shinyUI(navbarPage(
@@ -127,6 +133,14 @@ shinyUI(navbarPage(
         sidebarLayout(
             sidebarPanel(
                 h3("Visual Summary"),
+                h4("Select a Plot View"),
+                
+                radioButtons(
+                 inputId = "PlotChoice",
+                 label = "Plot",
+                 choices = list("Basketball Court", "Boxplot")
+                ),
+                
                 h4("Player Selection:"),
                 selectizeInput(
                 inputId ="player", 
@@ -141,10 +155,12 @@ shinyUI(navbarPage(
                     selected = "2017-18", 
                     choices = levels(as.factor(nba_shots$season))),
                 
-                radioButtons(
+               conditionalPanel(
+                   condition = 'input.PlotChoice == "Basketball Court"',
+                 radioButtons(
                     inputId = "shots", 
                     label = h4("Shot Status"), 
-                    choices = list("All Shots", "Missed Shots", "Made Shots")),
+                    choices = list("All Shots", "Missed Shots", "Made Shots"))),
                 
                 # Summary portion of the sidebar
                 h3("Numeric Summary"),
@@ -175,6 +191,7 @@ shinyUI(navbarPage(
                 h3("Visual Summary"),
                 plotOutput("BasketballPlot"),
                 br(),
+                br(),
                 # Put the summary in the main panel
                 h3("Numeric Summary"),
                     dataTableOutput("SummaryTable")
@@ -183,6 +200,8 @@ shinyUI(navbarPage(
             
         
     )),
+    
+
     
     # Create 3 sub-tabs for the modeling tab
     navbarMenu(
@@ -276,62 +295,129 @@ shinyUI(navbarPage(
             ))
         ),
         
-        # Tab for fitting the models explained
+
         tabPanel(
             title = "Fitting the Models",
             sidebarPanel(
-                h3( "Split the data: Train and Test"),
+            
+            h4("Model Settings"),
+            # Allow the user to choose model settings
                 numericInput(
-                    inputId = "RandomSeed",
-                    label = "Set a Random Seed",
-                    value = 1,
-                    min = -500,
-                    max = 500,
+                    inputId = "SetSeed",
+                    label = "Set Random Seed",
+                    value = 50,
+                    min = 1,
+                    max = 100,
                     step = 1
                 ),
-                
-                # Select the data to be used for the test set
+            # This allows the user to choose which portion of the data to use from the training set
                 numericInput(
-                    inputId = "TestSet",
-                    label = "Data used for Test Set",
-                    value = 0.2,
-                    min = 0.1,
-                    max = 0.5,
-                    step = 0.05
+                    inputId = "DataPro",
+                    label = "Proportion of the data to include in the training set",
+                    value = 0.70,
+                    min = 0.10,
+                    max = 0.90,
+                    step = 0.10
                 ),
-                
-                # Cross-Validation
-                h3("Cross-Validation"),
-                div(
-                    numericInput(
-                        inputId = "Folds",
-                        label = "Number of Folds",
-                        value = 3,
-                        min = 3,
-                        max = 5,
-                        step = 1
-                    ),
-                    style = "display:inline-block"
+            
+            # This allows the user to select number of folds
+                numericInput(
+                    inputId = "cvFolds",
+                    label = "Select Number of Folds",
+                    value = 5,
+                    min = 2,
+                    max = 8,
+                    step = 1
+                    
                 ),
-                
-                # Logistic Regression
-                h3("Logistic Regression"),
-                selectInput(
-                    inputId = "LogisticRegression",
-                    label = "Variables:",
-                    choices = colnames(nba_shots)[3:18],
-                    selected = c("loc_x","loc_y","shot_distance","minutes_remaining","seconds_remaining","time_remaining"),
-                    multiple = TRUE,
-                    selectize = TRUE
+            h4("Logistic Regression Parameters:"),
+            # Allow the user to choose Log parameters
+            selectInput(
+                inputId = "LogVars",
+                label = "Predictors to use:",
+                choices = colnames(nba_shots)[4:13],
+                selected = c("loc_x", "loc_y", "shot_distance", "minutes_remaining", "seconds_remaining"),
+                multiple = TRUE,
+                selectize = TRUE
+            ),
+            h4("Classification Tree Parameters:"),
+            # Allow user to choose Classification Tree Parameters
+            selectInput(
+                inputId = "ClassVars",
+                label = "Predictors to use:",
+                choices = colnames(nba_shots)[4:13],
+                selected = c("loc_x", "loc_y", "shot_distance", "minutes_remaining", "seconds_remaining"),
+                multiple = TRUE,
+                selectize = TRUE
+            ),
+            # Allow user to choose Random Forest Parameters
+            h4("Random Forest Parameters:"),
+            selectInput(
+              inputId = "ForestVars",
+              label = "Predictors to use:",
+              choices = colnames(nba_shots)[4:13],
+              selected = c("loc_x", "loc_y", "shot_distance", "minutes_remaining", "seconds_remaining"),
+              multiple = TRUE,
+              selectize = TRUE
+            ),
+            # Select the tuning parameters
+            selectizeInput(
+                inputId = "Selectmtry",
+                label = "Select a maximum of 10 values for mtry",
+                choices = 1:length(colnames(nba_shots)[4:13]),
+                multiple = TRUE,
+                selected = c(3, 6, 9),
+                options = list(maxItems = 10)
+            ),
+            
+            
+            
+                # This is the button for fitting the models
+                actionButton(
+                    inputId = "ModelFit",
+                    label = "Fit Models"
                 )
                 
+            ),
+            
+            # Main panel section to view outputs
+            mainPanel(
+                h4("Logistic Regression Model Fit Statistics"),
+                dataTableOutput("accuracy"),
+                br(),
+                h4("Classification Tree Fit Statistics"),
+                dataTableOutput("TreeAccuracy"),
+                br(),
+                h4("Random Forest Fit Statistics"),
+                dataTableOutput("RFAccuracy"),
+                h4("Tree Plot"),
+                plotOutput("TreePlot"),
+                br(),
+                h4("Random Forest Variable of Importance"),
+                plotOutput("RanForVarImp")
             )
             
         ),
         
         # Prediction Tab
         tabPanel(
-            title = "Prediction" 
+            title = "Prediction",
+             # Create the sidebar for this specific tab
+            sidebarPanel(
+                
+                # This button will fit the models
+                actionButton(
+                    inputId = "PredictionBegin",
+                    label = "Predict"
+                ),
+                
+            ),
+            
+            # This panel will show the predictions
+            mainPanel(
+                
+                
+            )
         )
         
         
