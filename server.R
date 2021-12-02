@@ -43,6 +43,15 @@ shinyServer(function(input, output, session) {
   }
   )
   
+  # Equation for Logistic Regression to be used in the modeling info tab
+  output$logEq <- renderUI({
+    withMathJax(
+      helpText(
+        "$$\\ln(\\frac{p_i}{1-p_i}) = \\beta_0 + \\Sigma^k_{j=1}\\beta_jx_{ij}$$"
+      )
+    )
+  })
+  
    # Create a plot for Data Exploration page
   output$BasketballPlot <- renderPlot({
     
@@ -2163,16 +2172,17 @@ shinyServer(function(input, output, session) {
         ggtitle("Random Forest Variable of Importance")
       ForestPlot
     })
+    
+    # These are the test fit statistics placed into a table
+    output$TestFit <- renderDataTable({
+      comparisons <- round(t(rbind(LogTest$overall[1], TreeTest$overall[1], predRF[1])), 4)
+      colnames(comparisons) <- c("Logistic Regression", "Classification Tree", "Random Forest")
+      comparisons
+    })
   })
   
-  # Equation for Logistic Regression to be used in the modeling info tab
-  output$logEq <- renderUI({
-    withMathJax(
-      helpText(
-        "$$\\ln(\\frac{p_i}{1-p_i}) = \\beta_0 + \\Sigma^k_{j=1}\\beta_jx_{ij}$$"
-      )
-    )
-  })
+  
+  
   
 })
 

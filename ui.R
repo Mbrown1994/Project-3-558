@@ -400,7 +400,9 @@ shinyUI(navbarPage(
                 plotOutput("TreePlot"),
                 br(),
                 h4("Random Forest Variable of Importance"),
-                plotOutput("RanForVarImp")
+                plotOutput("RanForVarImp"),
+                h4("Model Fit Statistics: Test Data"),
+                dataTableOutput("TestFit")
             )
             
         ),
