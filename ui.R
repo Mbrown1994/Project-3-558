@@ -8,6 +8,7 @@ library(caret)
 library(tree)
 library(dplyr)
 library(DT)
+library(ggplot2)
 
 # Ignore warnings
 suppressWarnings(library(caret))

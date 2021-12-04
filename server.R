@@ -8,7 +8,7 @@ library(DT)
 library(dplyr)
 library(tree)
 library(ggplot2)
-library(ranger)
+
 
 # Read in the data
 fileName <- "./NBAdata.csv"
