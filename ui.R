@@ -19,6 +19,8 @@ nba_shots <- read_csv(
     col_types = cols()
 )
 
+
+
 # Define UI for application that draws a histogram
 shinyUI(navbarPage(
 
@@ -341,42 +343,11 @@ shinyUI(navbarPage(
             selectInput(
                 inputId = "LogVars",
                 label = "Predictors to use:",
-                choices = colnames(nba_shots)[4:6],
-                selected = c("loc_x", "loc_y", "shot_distance"),
+                choices = colnames(nba_shots)[4:6&11:13],
+                selected = c("loc_x", "loc_y", "shot_distance", "period", "minutes_remaining", "seconds_remaining"),
                 multiple = TRUE,
                 selectize = TRUE
             ),
-            h4("Classification Tree Parameters:"),
-            # Allow user to choose Classification Tree Parameters
-            selectInput(
-                inputId = "ClassVars",
-                label = "Predictors to use:",
-                choices = colnames(nba_shots)[4:6],
-                selected = c("loc_x", "loc_y", "shot_distance"),
-                multiple = TRUE,
-                selectize = TRUE
-            ),
-            # Allow user to choose Random Forest Parameters
-            h4("Random Forest Parameters:"),
-            selectInput(
-              inputId = "ForestVars",
-              label = "Predictors to use:",
-              choices = colnames(nba_shots)[4:6],
-              selected = c("loc_x", "loc_y", "shot_distance"),
-              multiple = TRUE,
-              selectize = TRUE
-            ),
-            # Select the tuning parameters
-            selectizeInput(
-                inputId = "Selectmtry",
-                label = "Values for mtry",
-                choices = 1:length(colnames(nba_shots)[4:6]),
-                multiple = TRUE,
-                selected = c(3, 6, 9),
-                options = list(maxItems = 10)
-            ),
-            
-            
             
                 # This is the button for fitting the models
                 actionButton(
@@ -389,7 +360,7 @@ shinyUI(navbarPage(
             # Main panel section to view outputs
             mainPanel(
                 h4("Logistic Regression Model Fit Statistics"),
-                dataTableOutput("accuracy"),
+                dataTableOutput("Accuracy"),
                 br(),
                 h4("Classification Tree Fit Statistics"),
                 dataTableOutput("TreeAccuracy"),
@@ -399,8 +370,7 @@ shinyUI(navbarPage(
                 h4("Tree Plot"),
                 plotOutput("TreePlot"),
                 br(),
-                h4("Random Forest Variable of Importance"),
-                plotOutput("RanForVarImp"),
+                
                 h4("Model Fit Statistics: Test Data"),
                 dataTableOutput("TestFit")
             )
@@ -419,11 +389,12 @@ shinyUI(navbarPage(
                     label = "Predict"
                 ),
                 
+                
             ),
             
             # This panel will show the predictions
             mainPanel(
-                
+               
                 
             )
         )

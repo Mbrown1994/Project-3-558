@@ -3,9 +3,17 @@ library(shinythemes)
 library(tidyverse)
 library(magrittr)
 library(shiny)
+library(caret)
+library(DT)
+library(dplyr)
+library(tree)
+library(ggplot2)
+library(ranger)
 
 # Read in the data
 fileName <- "./NBAdata.csv"
+fileName
+
 nba_shots <- read_csv(
   fileName,
   col_types = cols()
@@ -2056,9 +2064,9 @@ shinyServer(function(input, output, session) {
   })
   
   # Modeling and prediction section begins here
-  # Remove NA values for modeling
-  na.omit(nba_shots, na.action="omit")
-  nba_shots[, c(4,5,6,12,13,18)] <- sapply(nba_shots[, c(4,5,6,12,13,18)], as.numeric)
+  # Convert shot_made_numeric to a factor
+  nba_shots$shot_made_numeric <- as.factor(nba_shots$shot_made_numeric)
+  
   
   # Fit the models on the training set
   observeEvent(input$ModelFit,{
@@ -2083,7 +2091,7 @@ shinyServer(function(input, output, session) {
     cvFolds <- input$cvFolds
     
     # Store mtry
-    Selectmtry <- input$Selectmtry
+    #Selectmtry <- input$Selectmtry
     
     # Set seeed
     set.seed(SetSeed)
@@ -2108,83 +2116,25 @@ shinyServer(function(input, output, session) {
     # Update the progress bar
     progress$inc(0.3, detail = "Logistic Regression Model")
     
-    LogisticModel <- train(shot_made_flag~.,
-                           data = NBATrain[, c(c("shot_made_flag"), LogVars)],
+    LogisticModel <- train(shot_made_numeric~.,
+                           data = NBATrain[, c(c("shot_made_numeric"), LogVars)],
                            method = "glm",
                            family = "binomial",
                            metric = "Accuracy",
                            trControl = TrCtrl)
-    
-    # Update the progress bar
-    progress$inc(0.5, detail = "Tree Model")
-    
-    # Classification Tree Section
-    TreeModel <- train(shot_made_flag~.,
-                       data = NBATrain[, c(c("shot_made_flag"), ClassVars)],
-                       method = "ctree2",
-                       metric = "Accuracy",
-                       trControl = TrCtrl,
-                       tuneGrid = expand.grid(maxdepth = 3, mincriterion = 0.95))
-    
-    # Update the progress bar
-    progress$inc(0.7, detail = "Random Forest Model")
-    
-    # Random Forest Section
-    rfFit <- train(shot_made_flag~.,
-                   data = NBATrain[,c(c("shot_made_flag"), ForestVars)],
-                   method = "ranger",
-                   metric = "Accuracy")
-    
-    # Update the progress bar
-    progress$inc(1, detail = "Model Performance on Training Set is Complete")
-    
-    # Accuracy for the Logistic Regression
-    output$accuracy <- renderDataTable({
-      FitData <- (t(as.matrix(LogisticModel$results)))
-      FitData
+    output$Accuracy <- renderDataTable({
       
-      colnames(FitData) <- c("Logistic Regression")
-      FitData
-    })
+      fitStats <- (t(as.matrix(LogisticModel$results)))
+      fitStats
+      
+      colnames(fitStats) <- c("Logistic Regression")
+      fitStats
     
-    # Accuracy for the Classification Tree
-    output$TreeAccuracy <- renderDataTable({
-      TreeAcc <- print(TreeModel)
-      TreeSummary <- as.data.frame(TreeAcc)
-      TreeSummary
-    })
-    
-    # Tree plot output
-    output$TreePlot <- renderPlot({
-      FullTree <- plot(TreeModel$finalModel)
-      FullTree
-    })
-    
-    # Accuracy for RF
-    output$RFAccuracy <- renderDataTable({
-      rfAccuracy <- rfFit
-      print(rfAccuracy)
-    })
-    
-    # Variable of Importance for RF
-    output$RanForVarImp <- renderPlot({
-      ForestPlot <- ggplot(varImp(object = rfFit)) +
-        ggtitle("Random Forest Variable of Importance")
-      ForestPlot
-    })
-    
-    # These are the test fit statistics placed into a table
-    output$TestFit <- renderDataTable({
-      comparisons <- round(t(rbind(LogTest$overall[1], TreeTest$overall[1], predRF[1])), 4)
-      colnames(comparisons) <- c("Logistic Regression", "Classification Tree", "Random Forest")
-      comparisons
     })
   })
   
-  
-  
-  
+# This starts the prediction tab
+# Change predictors to factors
 })
 
-
- 
+  
