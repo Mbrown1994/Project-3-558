@@ -21,6 +21,19 @@ This app utilizes the following packages:
 - `dplyr`: helps format the dataframe 
 - `tree`: helps with the graphics of this project
 
+The packages can be installed using the below code:
+```
+install.packages("shiny")
+install.packages("shinyWidgets")
+install.packages("shinythemes")
+install.packages("tidyverse")
+install.packages("magrittr")
+install.packages("ggplot2")
+install.packages("DT")
+install.packages("caret")
+install.packages("dplyr")
+install.packages("tree")
+```
 
 ## The code below will run this app
 
