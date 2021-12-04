@@ -338,11 +338,28 @@ shinyUI(navbarPage(
                     step = 1
                     
                 ),
-            h4("Logistic Regression Parameters:"),
             # Allow the user to choose Log parameters
             selectInput(
                 inputId = "LogVars",
-                label = "Predictors to use:",
+                label = "Predictors to use for logistic regression:",
+                choices = colnames(nba_shots)[4:6&11:13],
+                selected = c("loc_x", "loc_y", "shot_distance", "period", "minutes_remaining", "seconds_remaining"),
+                multiple = TRUE,
+                selectize = TRUE
+            ),
+            # Allow the user to choose Tree parameters
+            selectInput(
+                inputId = "ClassVars",
+                label = "Predictors to use for Classification Tree:",
+                choices = colnames(nba_shots)[4:6&11:13],
+                selected = c("loc_x", "loc_y", "shot_distance", "period", "minutes_remaining", "seconds_remaining"),
+                multiple = TRUE,
+                selectize = TRUE
+            ),
+            # Allow the user to choose RF parameters
+            selectInput(
+                inputId = "ForestVars",
+                label = "Predictors to use for Random Forest:",
                 choices = colnames(nba_shots)[4:6&11:13],
                 selected = c("loc_x", "loc_y", "shot_distance", "period", "minutes_remaining", "seconds_remaining"),
                 multiple = TRUE,
@@ -352,21 +369,22 @@ shinyUI(navbarPage(
                 # This is the button for fitting the models
                 actionButton(
                     inputId = "ModelFit",
-                    label = "Fit Models"
+                    label = "Fit Models",
                 )
                 
             ),
             
             # Main panel section to view outputs
             mainPanel(
-                h4("Logistic Regression Model Fit Statistics"),
+                h4("Logistic Regression Model Fit Statistics on Training Data"),
                 dataTableOutput("Accuracy"),
                 br(),
-                h4("Classification Tree Fit Statistics"),
+                h4("Classification Tree Fit Statistics on Training Data"),
                 dataTableOutput("TreeAccuracy"),
                 br(),
                 h4("Random Forest Fit Statistics"),
                 dataTableOutput("RFAccuracy"),
+                # Tree Plot
                 h4("Tree Plot"),
                 plotOutput("TreePlot"),
                 br(),

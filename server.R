@@ -2122,6 +2122,8 @@ shinyServer(function(input, output, session) {
                            family = "binomial",
                            metric = "Accuracy",
                            trControl = TrCtrl)
+    
+    # Output the Accuracy table for Logistic Regression results
     output$Accuracy <- renderDataTable({
       
       fitStats <- (t(as.matrix(LogisticModel$results)))
@@ -2129,8 +2131,52 @@ shinyServer(function(input, output, session) {
       
       colnames(fitStats) <- c("Logistic Regression")
       fitStats
-    
     })
+    
+    # Update the progress bar for when it is running
+    progress$inc(0.5, detail = "Tree Model")
+    
+    # Run the Classification Tree Model
+    TreeModel <- train(shot_made_numeric ~.,
+                       data = NBATrain[, c(c("shot_made_numeric"), ClassVars)],
+                       method = "ctree2",
+                       metric = "Accuracy",
+                       trControl = TrCtrl,
+                       tuneGrid = expand.grid(maxdepth = 3, mincriterion = 0.95))
+    
+    # Output the Tree accuracy
+    output$TreeAccuracy <- renderDataTable({
+      AccTree <- print(TreeModel)
+      TreeSummary <- as.data.frame(AccTree)
+      TreeSummary
+    })
+    
+    # Output a Tree plot
+    output$TreePlot <- renderPlot({
+      TreeFrame <- plot(TreeModel$finalModel)
+      TreeFrame
+    })
+    
+    # Update the progress bar for when it's running the RF Model
+    progress$inc(0.7, detail = "Random Foreset Model")
+    
+    # Random Forest Modeling
+    rfFit <- train(shot_made_numeric~.,
+                   data = NBATrain[, c(c("shot_made_numeric"), ForestVars)],
+                   method = "rf",
+                   trControl = trainControl(method = "cv", number = 5),
+                   preProcess = c("center", "scale"),
+                   tuneGrid = data.frame(mtry = 1:6),
+                   metric = "Accuracy")
+    
+    # Accuracy for Random Forest
+    output$RFAccuracy <- renderDataTable({
+      rfFitAccuracy <- rfFit
+      print(rfFitAccuracy)
+    })
+    
+    # Final update on the progress bar
+    progress$inc(1, detail = "Results are ready to review")
   })
   
 # This starts the prediction tab
