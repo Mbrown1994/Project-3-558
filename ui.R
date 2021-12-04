@@ -10,8 +10,6 @@ library(dplyr)
 library(DT)
 library(ggplot2)
 
-# Ignore warnings
-suppressWarnings(library(caret))
 
 # Read in the data
 fileName <- "./NBAdata.csv"
@@ -20,13 +18,19 @@ nba_shots <- read_csv(
     col_types = cols()
 )
 
+# A helper file was used to help create the basketball court on the data exploration page. 
+# This data and the helper file can be found here:
+# http://juliawrobel.com/tutorials/shiny_tutorial_nba.html
+
+# Changed the data a little for the modeling sections below 
 predData <- nba_shots
 predData$shot_value <- as.factor(predData$shot_value)
 predData$shot_zone_area <- as.factor(predData$shot_zone_area)
 predData$action_type <- as.factor(predData$action_type)
 predData$shot_made_numeric <- as.factor(predData$shot_made_numeric)
 
-
+# Ignore a few warnings
+suppressWarnings(library(caret))
 
 
 
@@ -150,12 +154,14 @@ shinyUI(navbarPage(
                 h3("Visual Summary"),
                 h4("Select a Plot View"),
                 
+                # Allows the user to decide which plot to view
                 radioButtons(
                  inputId = "PlotChoice",
                  label = "Plot",
                  choices = list("Basketball Court", "Boxplot")
                 ),
                 
+                # Allows the user to select a specific player
                 h4("Player Selection:"),
                 selectizeInput(
                 inputId ="player", 
@@ -163,6 +169,7 @@ shinyUI(navbarPage(
                 selected = "LeBron James", 
                 choices = levels(as.factor(nba_shots$player_name))),
                 
+                # Outputs a different image depending on what player is selected
                 uiOutput("image"),
                 selectizeInput(
                     inputId = "season", 
