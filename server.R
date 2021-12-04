@@ -2175,6 +2175,13 @@ shinyServer(function(input, output, session) {
       print(rfFitAccuracy)
     })
     
+    # Add Random Forest Variable of Importance
+    output$RanForVarImp <- renderPlot({
+      ForestPlot <- ggplot(varImp(object = rfFit)) +
+        ggtitle("Random Forest Variable of Importance")
+      ForestPlot
+    })
+    
     # Final update on the progress bar
     progress$inc(1, detail = "Results are ready to review")
   })

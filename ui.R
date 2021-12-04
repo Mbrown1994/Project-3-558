@@ -388,7 +388,8 @@ shinyUI(navbarPage(
                 h4("Tree Plot"),
                 plotOutput("TreePlot"),
                 br(),
-                
+                plotOutput("RanForVarImp"),
+                br(),
                 h4("Model Fit Statistics: Test Data"),
                 dataTableOutput("TestFit")
             )
