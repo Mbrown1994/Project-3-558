@@ -17,19 +17,10 @@ This app utilizes the following packages:
 - `magrittr`: formatting
 - `ggplot2`: plotting and visualization
 - `DT`: adds additional creating/editing tools
+- `caret`: used for the modeling process
+- `dplyr`: helps format the dataframe 
+- `tree`: helps with the graphics of this project
 
-
-Installation code for each above package:
-
-```
-install.packages("shiny")
-install.packages("shinyWidgets")
-install.packages("shinythemes")
-install.packages("tidyverse")
-install.packages("magrittr")
-install.packages("ggplot2")
-install.packages("DT")
-```
 
 ## The code below will run this app
 
