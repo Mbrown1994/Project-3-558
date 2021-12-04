@@ -2184,10 +2184,52 @@ shinyServer(function(input, output, session) {
     
     # Final update on the progress bar
     progress$inc(1, detail = "Results are ready to review")
+    
+    # Comparison on the Test set starts here
+    # Logistic Regression
+    LogTest <- confusionMatrix(data = NBATest$shot_made_numeric, reference = predict(LogisticModel, newdata = NBATest))
+    LogTest
+    LogTest$overall[[1]]
+    
+    # Classification Tree
+    CTreeTest <- confusionMatrix(data = NBATest$shot_made_numeric, reference = predict(TreeModel, newdata = NBATest))
+    CTreeTest
+    
+    # Random Forest
+    PredRF <- predict(rfFit, newdata = NBATest)
+    predrf <- postResample(PredRF, NBATest$shot_made_numeric)
+    predrf
+    
+    # Place all of this in a table for the user
+    output$TestFit <- renderDataTable({
+      comparisons <- (round(t(rbind(LogTest$overall[1], CTreeTest$overall[1], predrf[1])), 4))
+      colnames(comparisons) <- c("Logistic Regression", "Classification Tree", "Random Forest")
+      comparisons
+    })
   })
   
 # This starts the prediction tab
-# Change predictors to factors
+# Change some variables to factors
+  predData <- nba_shots
+  predData$shot_value <- as.factor(predData$shot_value)
+  predData$shot_zone_area <- as.factor(predData$shot_zone_area)
+  predData$shot_made_flag <- as.factor(predData$shot_made_flag)
+  predData$shot_made_numeric <- as.factor(predData$shot_made_numeric)
+  predData$action_type <- as.factor(predData$action_type)
+  
+  observeEvent(input$predict, {
+    glmFit<-glm(shot_made_numeric ~ shot_value + shot_zone_area + shot_made_flag + action_type, data = predData, family = "binomial")
+    glmFit
+    
+    predictionObject <- predict(glmFit, newdata = data.frame(shot_value = c(input$shotvalues),
+                                                             shot_zone_area = c(input$zonevalue),
+                                                             shot_made_flag = c(input$madevalue),
+                                                             action_type = c(input$actionvalue)), se.fit = TRUE)
+    
+    output$predOutput <- renderPrint({
+      print(predictionObject)
+    })
+  })
 })
 
   

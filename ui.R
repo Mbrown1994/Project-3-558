@@ -19,6 +19,14 @@ nba_shots <- read_csv(
     col_types = cols()
 )
 
+predData <- nba_shots
+predData$shot_value <- as.factor(predData$shot_value)
+predData$shot_zone_area <- as.factor(predData$shot_zone_area)
+predData$action_type <- as.factor(predData$action_type)
+predData$shot_made_numeric <- as.factor(predData$shot_made_numeric)
+
+
+
 
 
 # Define UI for application that draws a histogram
@@ -365,6 +373,7 @@ shinyUI(navbarPage(
                 multiple = TRUE,
                 selectize = TRUE
             ),
+           
             
                 # This is the button for fitting the models
                 actionButton(
@@ -401,10 +410,37 @@ shinyUI(navbarPage(
             title = "Prediction",
              # Create the sidebar for this specific tab
             sidebarPanel(
-                
+                selectInput(
+                    inputId = "shotvalues",
+                    label = "Choose values",
+                    choices = unique(predData$shot_value),
+                    multiple = TRUE,
+                    selected = "2"
+                ),
+                selectInput(
+                    inputId = "zonevalue",
+                    label = "Choose values",
+                    choices = unique(predData$shot_zone_area),
+                    multiple = TRUE,
+                    selected = "Right Side(R)"
+                ),
+                selectInput(
+                    inputId = "madevalue",
+                    label = "Choose values",
+                    choices = unique(predData$shot_made_flag),
+                    multiple = TRUE,
+                    selected = "made"
+                ),
+                selectInput(
+                    inputId = "actionvalue",
+                    label = "Choose values",
+                    choices = unique(predData$action_type),
+                    multiple = TRUE,
+                    selected = "Jump Shot"
+                ),
                 # This button will fit the models
                 actionButton(
-                    inputId = "PredictionBegin",
+                    inputId = "predict",
                     label = "Predict"
                 ),
                 
@@ -413,7 +449,7 @@ shinyUI(navbarPage(
             
             # This panel will show the predictions
             mainPanel(
-               
+              verbatimTextOutput("predOutput") 
                 
             )
         )
